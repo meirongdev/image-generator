@@ -2,14 +2,15 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/meirongdev/image-generator/internal/drawing"
 )
 
-func router() *gin.Engine {
+func router(templatePath string) *gin.Engine {
 	r := gin.Default()
-	r.LoadHTMLGlob("templates/*.html")
+	r.LoadHTMLGlob(templatePath)
 	imageGroup := r.Group("/image")
 	{
 		imageGroup.GET("/:name", func(c *gin.Context) {
@@ -35,7 +36,11 @@ func router() *gin.Engine {
 }
 
 func main() {
-	err := router().Run(":8080")
+	templatePath := "templates/*.html"
+	if envPath := os.Getenv("TEMPLATE_PATH"); envPath != "" {
+		templatePath = envPath
+	}
+	err := router(templatePath).Run(":8080")
 	if err != nil {
 		panic(err)
 	}
