@@ -3,6 +3,7 @@ package drawing
 import (
 	"fmt"
 	"image/color"
+	"log"
 	"math/rand/v2"
 
 	"github.com/jdxyw/generativeart"
@@ -37,6 +38,9 @@ func DrawOne(art string) string {
 	c.Draw(DRAWINGS[art])
 
 	fileName := fmt.Sprintf("/tmp/%s_%f.png", art, rand.Float64())
-	c.ToPNG(fileName)
+	err := c.ToPNG(fileName)
+	if err != nil {
+		log.Println("error when save png", fileName, err)
+	}
 	return fileName
 }

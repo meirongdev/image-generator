@@ -5,6 +5,7 @@ go 1.23.1
 require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/jdxyw/generativeart v0.0.0-20220127024657-50049f153090
+	github.com/matoous/go-nanoid/v2 v2.1.0
 )
 
 require (

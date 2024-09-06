@@ -7,8 +7,8 @@ import (
 )
 
 func TestAPIRouteImage(t *testing.T) {
-	templatePath := "../templates/*.html"
-	r := router(templatePath)
+	basePath := ".."
+	r := router(basePath, nil)
 	ts := httptest.NewServer(r)
 	defer ts.Close()
 
